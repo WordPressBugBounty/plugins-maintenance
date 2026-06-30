@@ -3,7 +3,7 @@ Contributors: WebFactory
 Tags: maintenance, maintenance mode, maintenance page, coming soon, coming soon page
 Requires at least: 4.4
 Tested up to: 7.0
-Stable tag: 4.30
+Stable tag: 4.31
 Requires PHP: 5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -69,9 +69,9 @@ Or if needed, upload manually;
 
 
 == Screenshots ==
-1. Maintenance page with default design
+1. Maintenance page with default design and layout
 2. Log in form is built into the maintenance page
-3. Maintenance plugin layout builder
+4. Maintenance plugin layout builder
 
 
 == Frequently Asked Questions ==
@@ -98,6 +98,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 
 == Changelog ==
+= v4.31 =
+- 2026/06/30
+- changed login icon back to padlock
+- minor bug fixes
+
 = v4.30 =
 - 2026/06/18
 - complete rewrite, new options, new GUI

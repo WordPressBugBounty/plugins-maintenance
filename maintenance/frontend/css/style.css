@@ -2140,13 +2140,13 @@ website:    http://www.burocratik.com
 
 .login-button:before {
     font-family: dashicons;
-    content: "\f120";
+    content: "\f160";
     display: inline-block;
-    font-size: 18px;
+    font-size: 30px;
     line-height: 1;
     vertical-align: middle;
     margin-right: 6px;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

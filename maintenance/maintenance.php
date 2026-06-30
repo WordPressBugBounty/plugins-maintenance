@@ -3,7 +3,7 @@
 	Plugin Name: Maintenance
 	Plugin URI: https://wpmaintenancemode.com/
 	Description: Put your site in maintenance mode, away from the public view. Use maintenance plugin if your website is in development or you need to change a few things, run an upgrade. Make it only accessible to logged in users.
-	Version: 4.30
+	Version: 4.31
 	Author: WebFactory Ltd
 	Author URI: https://www.webfactoryltd.com/
 	License: GPL2
@@ -158,40 +158,6 @@ class MTNC
 
         $default_theme_id = md5(time() . 'default');
         $def_options = array(
-            'theme_global' => $default_theme_id,
-            'themes' => array($default_theme_id => json_decode(
-                '{
-                    "modules":{},
-                    "modules_order":[],
-                    "name":"Default",
-                    "theme_thumbnail":"",
-                    "theme_status":"",
-                    "body_font_size":"16",
-                    "body_font_color":"FFFFFF",
-                    "body_font":"Orbitron",
-                    "body_link_color":"0096ff",
-                    "body_link_hover_color":"57baff",
-                    "background_type":"image",
-                    "background_video":"",
-                    "background_video_fallback":"",
-                    "background_video_filter":"",
-                    "background_size_opt":"cover",
-                    "background_position":"center center",
-                    "background_image_filter":"",
-                    "background_blur":"",
-                    "background_image":"' . trailingslashit(MTNC_URL) . 'img/mountain-bg.jpg",
-                    "preloader_background_image":"",
-                    "background_color":"FFFFFF",
-                    "login_background_color":"000000",
-                    "content_overlay":"1",
-                    "content_width":"600",
-                    "content_overlay_color":"#rgba(0,0,0,0.2)",
-                    "content_overlay_shadow_color":"rgba(0,0,0,0.2)",
-                    "content_position":"middle",
-                    "modules_spacing":"10",
-                    "custom_css":""
-                }'
-            )),
             'status' => '0',
             'mode' => 'layout',
             'mtnc_page' => 0,
@@ -233,6 +199,930 @@ class MTNC
             'custom_wp_maintenance_title' => '',
             'custom_wp_maintenance_content' => '',
 
+        );
+
+        $def_options['theme_global'] = $default_theme_id;
+        $def_options['themes'] = array($default_theme_id => json_decode(
+                '{
+                    "modules": {
+                        "header-dbd02cd1": {
+                        "name": "Header",
+                        "type": "header",
+                        "groups": {
+                            "header": {
+                            "name": "Header",
+                            "active": true,
+                            "fields": {
+                                "text": {
+                                "type": "text",
+                                "name": "text",
+                                "label": "Text",
+                                "value": "Site is undergoing maintenance",
+                                "class": "full-width",
+                                "desc": ""
+                                },
+                                "text_align": {
+                                "type": "radio",
+                                "name": "text_align",
+                                "label": "Text Align",
+                                "class": "",
+                                "values": {
+                                    "left": "Left",
+                                    "center": "Center",
+                                    "right": "Right"
+                                },
+                                "value": "center"
+                                },
+                                "font_size": {
+                                "type": "range",
+                                "name": "font_size",
+                                "label": "Font Size",
+                                "value": "47",
+                                "min": 6,
+                                "max": 120,
+                                "class": "",
+                                "units": {
+                                    "px": "px",
+                                    "pt": "pt",
+                                    "em": "em"
+                                },
+                                "unit_value": "px"
+                                },
+                                "color": {
+                                "type": "color",
+                                "name": "text_color",
+                                "label": "Color",
+                                "value": "rgba(255,255,255,1)",
+                                "desc": ""
+                                },
+                                "font": {
+                                "type": "font",
+                                "name": "font",
+                                "label": "Font",
+                                "value": "Open Sans",
+                                "class": "full-width",
+                                "desc": ""
+                                },
+                                "line_height": {
+                                "type": "number",
+                                "name": "line_height",
+                                "label": "Line Height",
+                                "value": "2",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "em",
+                                "class": "number_small",
+                                "desc": ""
+                                }
+                            }
+                            },
+                            "layout": {
+                            "name": "Layout",
+                            "fields": {
+                                "padding_label": {
+                                "type": "label",
+                                "name": "padding_label",
+                                "label": "Padding"
+                                },
+                                "padding_top": {
+                                "type": "number",
+                                "name": "padding_top",
+                                "label": "Top",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_top.png",
+                                "value": "10",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_bottom": {
+                                "type": "number",
+                                "name": "padding_bottom",
+                                "label": "Bottom",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_bottom.png",
+                                "value": "10",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_left": {
+                                "type": "number",
+                                "name": "padding_left",
+                                "label": "Left",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_left.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_right": {
+                                "type": "number",
+                                "name": "padding_right",
+                                "label": "Right",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_right.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_label": {
+                                "type": "label",
+                                "name": "margin_label",
+                                "label": "Margin"
+                                },
+                                "margin_top": {
+                                "type": "number",
+                                "name": "margin_top",
+                                "label": "Top",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_top.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_bottom": {
+                                "type": "number",
+                                "name": "margin_bottom",
+                                "label": "Bottom",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_bottom.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_left": {
+                                "type": "number",
+                                "name": "margin_left",
+                                "label": "Left",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_left.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_right": {
+                                "type": "number",
+                                "name": "margin_right",
+                                "label": "Right",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_right.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "background_label": {
+                                "type": "label",
+                                "name": "background_label",
+                                "label": "Background"
+                                },
+                                "background_color": {
+                                "type": "color",
+                                "name": "background_color",
+                                "nolabel": true,
+                                "value": "rgba(255,255,255,0)",
+                                "desc": ""
+                                },
+                                "background": {
+                                "type": "image",
+                                "name": "background",
+                                "nolabel": true,
+                                "value": "",
+                                "class": "",
+                                "desc": ""
+                                }
+                            }
+                            }
+                        }
+                        },
+                        "content-471365b7": {
+                        "name": "Content",
+                        "type": "content",
+                        "groups": {
+                            "col1": {
+                            "name": "Footer",
+                            "active": true,
+                            "fields": {
+                                "text": {
+                                "type": "textarea",
+                                "name": "text",
+                                "label": "Text",
+                                "value": "Maintenance mode is on",
+                                "class": "full-width",
+                                "desc": ""
+                                },
+                                "font_size": {
+                                "type": "number",
+                                "name": "font_size",
+                                "label": "Font Size",
+                                "value": "36",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "pt": "pt",
+                                    "em": "em"
+                                },
+                                "unit_value": "px"
+                                },
+                                "color": {
+                                "type": "color",
+                                "name": "text_color",
+                                "label": "Color",
+                                "value": "rgba(255,255,255,1)",
+                                "desc": ""
+                                },
+                                "font": {
+                                "type": "font",
+                                "name": "font",
+                                "label": "Font",
+                                "value": "Open Sans",
+                                "class": "full-width",
+                                "desc": ""
+                                },
+                                "line_height": {
+                                "type": "number",
+                                "name": "line_height",
+                                "label": "Line Height",
+                                "value": "1",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "em",
+                                "class": "number_small",
+                                "desc": ""
+                                }
+                            }
+                            },
+                            "layout": {
+                            "name": "Layout",
+                            "fields": {
+                                "padding_label": {
+                                "type": "label",
+                                "name": "padding_label",
+                                "label": "Padding"
+                                },
+                                "padding_top": {
+                                "type": "number",
+                                "name": "padding_top",
+                                "label": "Top",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_top.png",
+                                "value": "100",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_bottom": {
+                                "type": "number",
+                                "name": "padding_bottom",
+                                "label": "Bottom",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_bottom.png",
+                                "value": "10",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_left": {
+                                "type": "number",
+                                "name": "padding_left",
+                                "label": "Left",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_left.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_right": {
+                                "type": "number",
+                                "name": "padding_right",
+                                "label": "Right",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_right.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_label": {
+                                "type": "label",
+                                "name": "margin_label",
+                                "label": "Margin"
+                                },
+                                "margin_top": {
+                                "type": "number",
+                                "name": "margin_top",
+                                "label": "Top",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_top.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_bottom": {
+                                "type": "number",
+                                "name": "margin_bottom",
+                                "label": "Bottom",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_bottom.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_left": {
+                                "type": "number",
+                                "name": "margin_left",
+                                "label": "Left",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_left.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_right": {
+                                "type": "number",
+                                "name": "margin_right",
+                                "label": "Right",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_right.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "background_label": {
+                                "type": "label",
+                                "name": "background_label",
+                                "label": "Background"
+                                },
+                                "background_color": {
+                                "type": "color",
+                                "name": "background_color",
+                                "nolabel": true,
+                                "value": "rgba(255,255,255,0)",
+                                "desc": ""
+                                },
+                                "background": {
+                                "type": "image",
+                                "name": "background",
+                                "nolabel": true,
+                                "value": "",
+                                "class": "",
+                                "desc": ""
+                                }
+                            }
+                            }
+                        }
+                        },
+                        "content-9742e2f8": {
+                        "name": "Content",
+                        "type": "content",
+                        "groups": {
+                            "col1": {
+                            "name": "Footer",
+                            "active": true,
+                            "fields": {
+                                "text": {
+                                "type": "textarea",
+                                "name": "text",
+                                "label": "Text",
+                                "value": "Site will be available soon. Thank you for your patience!",
+                                "class": "full-width",
+                                "desc": ""
+                                },
+                                "font_size": {
+                                "type": "number",
+                                "name": "font_size",
+                                "label": "Font Size",
+                                "value": "20",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "pt": "pt",
+                                    "em": "em"
+                                },
+                                "unit_value": "px"
+                                },
+                                "color": {
+                                "type": "color",
+                                "name": "text_color",
+                                "label": "Color",
+                                "value": "rgba(255,255,255,1)",
+                                "desc": ""
+                                },
+                                "font": {
+                                "type": "font",
+                                "name": "font",
+                                "label": "Font",
+                                "value": "Open Sans",
+                                "class": "full-width",
+                                "desc": ""
+                                },
+                                "line_height": {
+                                "type": "number",
+                                "name": "line_height",
+                                "label": "Line Height",
+                                "value": "1",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "em",
+                                "class": "number_small",
+                                "desc": ""
+                                }
+                            }
+                            },
+                            "layout": {
+                            "name": "Layout",
+                            "fields": {
+                                "padding_label": {
+                                "type": "label",
+                                "name": "padding_label",
+                                "label": "Padding"
+                                },
+                                "padding_top": {
+                                "type": "number",
+                                "name": "padding_top",
+                                "label": "Top",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_top.png",
+                                "value": "10",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_bottom": {
+                                "type": "number",
+                                "name": "padding_bottom",
+                                "label": "Bottom",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_bottom.png",
+                                "value": "10",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_left": {
+                                "type": "number",
+                                "name": "padding_left",
+                                "label": "Left",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_left.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_right": {
+                                "type": "number",
+                                "name": "padding_right",
+                                "label": "Right",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_right.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_label": {
+                                "type": "label",
+                                "name": "margin_label",
+                                "label": "Margin"
+                                },
+                                "margin_top": {
+                                "type": "number",
+                                "name": "margin_top",
+                                "label": "Top",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_top.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_bottom": {
+                                "type": "number",
+                                "name": "margin_bottom",
+                                "label": "Bottom",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_bottom.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_left": {
+                                "type": "number",
+                                "name": "margin_left",
+                                "label": "Left",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_left.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_right": {
+                                "type": "number",
+                                "name": "margin_right",
+                                "label": "Right",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_right.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "background_label": {
+                                "type": "label",
+                                "name": "background_label",
+                                "label": "Background"
+                                },
+                                "background_color": {
+                                "type": "color",
+                                "name": "background_color",
+                                "nolabel": true,
+                                "value": "rgba(255,255,255,0)",
+                                "desc": ""
+                                },
+                                "background": {
+                                "type": "image",
+                                "name": "background",
+                                "nolabel": true,
+                                "value": "",
+                                "class": "",
+                                "desc": ""
+                                }
+                            }
+                            }
+                        }
+                        },
+                        "footer-a29820d6": {
+                        "name": "Footer",
+                        "type": "footer",
+                        "groups": {
+                            "col1": {
+                            "name": "Footer",
+                            "active": true,
+                            "fields": {
+                                "text": {
+                                "type": "textarea",
+                                "name": "text",
+                                "label": "Text",
+                                "value": "© Maintenance 2026",
+                                "class": "full-width",
+                                "desc": ""
+                                },
+                                "font_size": {
+                                "type": "number",
+                                "name": "font_size",
+                                "label": "Font Size",
+                                "value": "24",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "pt": "pt",
+                                    "em": "em"
+                                },
+                                "unit_value": "px"
+                                },
+                                "color": {
+                                "type": "color",
+                                "name": "text_color",
+                                "label": "Color",
+                                "value": "rgba(255,255,255,1)",
+                                "desc": ""
+                                },
+                                "font": {
+                                "type": "font",
+                                "name": "font",
+                                "label": "Font",
+                                "value": "Open Sans",
+                                "class": "full-width",
+                                "desc": ""
+                                },
+                                "line_height": {
+                                "type": "number",
+                                "name": "line_height",
+                                "label": "Line Height",
+                                "value": "1",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "em",
+                                "class": "number_small",
+                                "desc": ""
+                                }
+                            }
+                            },
+                            "layout": {
+                            "name": "Layout",
+                            "fields": {
+                                "padding_label": {
+                                "type": "label",
+                                "name": "padding_label",
+                                "label": "Padding"
+                                },
+                                "padding_top": {
+                                "type": "number",
+                                "name": "padding_top",
+                                "label": "Top",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_top.png",
+                                "value": "10",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_bottom": {
+                                "type": "number",
+                                "name": "padding_bottom",
+                                "label": "Bottom",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_bottom.png",
+                                "value": "10",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_left": {
+                                "type": "number",
+                                "name": "padding_left",
+                                "label": "Left",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_left.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "padding_right": {
+                                "type": "number",
+                                "name": "padding_right",
+                                "label": "Right",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/padding_right.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_label": {
+                                "type": "label",
+                                "name": "margin_label",
+                                "label": "Margin"
+                                },
+                                "margin_top": {
+                                "type": "number",
+                                "name": "margin_top",
+                                "label": "Top",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_top.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_bottom": {
+                                "type": "number",
+                                "name": "margin_bottom",
+                                "label": "Bottom",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_bottom.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_left": {
+                                "type": "number",
+                                "name": "margin_left",
+                                "label": "Left",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_left.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "margin_right": {
+                                "type": "number",
+                                "name": "margin_right",
+                                "label": "Right",
+                                "image_label": "' . trailingslashit(MTNC_URL) . 'img/icons/margin_right.png",
+                                "value": "0",
+                                "class": "number_small",
+                                "units": {
+                                    "px": "px",
+                                    "percent": "%",
+                                    "em": "em"
+                                },
+                                "unit_value": "px",
+                                "wrapper_class": "col-4"
+                                },
+                                "background_label": {
+                                "type": "label",
+                                "name": "background_label",
+                                "label": "Background"
+                                },
+                                "background_color": {
+                                "type": "color",
+                                "name": "background_color",
+                                "nolabel": true,
+                                "value": "rgba(255,255,255,0)",
+                                "desc": ""
+                                },
+                                "background": {
+                                "type": "image",
+                                "name": "background",
+                                "nolabel": true,
+                                "value": "",
+                                "class": "",
+                                "desc": ""
+                                }
+                            }
+                            }
+                        }
+                        }
+                    },
+                    "modules_order": {
+                        "header-dbd02cd1": "header-dbd02cd1",
+                        "content-471365b7": "content-471365b7",
+                        "content-9742e2f8": "content-9742e2f8",
+                        "footer-a29820d6": "footer-a29820d6"
+                    },
+                    "name": "Default",
+                    "theme_thumbnail": "",
+                    "theme_status": "",
+                    "body_font_size": "16",
+                    "body_font_color": "#FFFFFF",
+                    "body_font": "Open Sans",
+                    "body_link_color": "#0096FF",
+                    "body_link_hover_color": "#57BAFF",
+                    "background_type": "image",
+                    "background_video": "",
+                    "background_video_fallback": "",
+                    "background_video_filter": "",
+                    "background_size_opt": "cover",
+                    "background_position": "center center",
+                    "background_image_filter": "",
+                    "background_blur": 0,
+                    "background_image": "' . trailingslashit(MTNC_URL) . 'img/mt-sample-background.jpg",
+                    "preloader_background_image": "",
+                    "background_color": "rgba(0,0,0,1)",
+                    "login_background_color": "rgba(0,0,0,1)",
+                    "content_overlay": "",
+                    "content_width": 916,
+                    "content_overlay_color": "rgba(0,0,0,0.2)",
+                    "content_overlay_shadow_color": "rgba(0,0,0,0.2)",
+                    "content_position": "middle",
+                    "modules_spacing": 20,
+                    "custom_css": ".mtnc_module,\r\n.mtnc_module h2{\r\n\tfont-weight:300;\r\n}"
+                    }'
+            )
         );
 
         if (sizeof($options['options']) < sizeof($def_options)) {
@@ -1198,10 +2088,10 @@ class MTNC
         $out .=  '<ul class="mtnc-list">';
         $out .=  '<li>Best-rated WordPress multilingual plugin</li>';
         $out .=  '<li>Simple 5-minute set-up. No coding required</li>';
-        $out .=  '<li>Accelerated translation management: Machine & human translations with access to professional translators</li>';
+        $out .=  '<li>Accelerated translation management: AI powered & human translations with access to professional translators</li>';
         $out .=  '<li>Compatible with any WordPress theme or plugin</li>';
         $out .=  '<li>Optimized for multilingual SEO</li>';
-        $out .=  '<li>10-day Free trial and free plan available</li>';
+        $out .=  '<li>14-day Free trial and free plan available</li>';
         $out .=  '</ul>';
         $out .=  '<p class="upsell-footer"><a class="button button-primary" id="install-weglot">Install &amp; activate Weglot to make your website multilingual</a></p>';
         $out .=  '</div>';
@@ -1976,7 +2866,7 @@ class MTNC
         echo '</ul></div>';
 
         //Layout
-        echo '<div class="arrange-wrapper mtnc-theme-builder-right-col">';
+        echo '<div class="arrange-wrapper mtnc-theme-builder-right-col"><span class="arrange-label">Active Modules (hover over each one to show the edit menu)</span>';
         echo '<div class="arrange-wrapper" id="mtnc-theme-builder-layout-wrapper">';
         echo '<div class="browser-header">
                 <div class="browser-button-wrapper">
