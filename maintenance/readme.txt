@@ -2,7 +2,7 @@
 Contributors: WebFactory
 Tags: maintenance, maintenance mode, maintenance page, coming soon, coming soon page
 Requires at least: 4.4
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 4.32
 Requires PHP: 5.2
 License: GPLv2 or later
