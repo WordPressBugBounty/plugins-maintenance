@@ -3,7 +3,7 @@
 	Plugin Name: Maintenance
 	Plugin URI: https://wpmaintenancemode.com/
 	Description: Put your site in maintenance mode, away from the public view. Use maintenance plugin if your website is in development or you need to change a few things, run an upgrade. Make it only accessible to logged in users.
-	Version: 4.32
+	Version: 4.33
 	Author: WebFactory Ltd
 	Author URI: https://www.webfactoryltd.com/
 	License: GPL2
@@ -1688,16 +1688,17 @@ class MTNC
                 $new_options = array(
                     'theme_global' => $options['theme_global'],
                     'themes' => $options['themes'],
-                    'status' => @absint($extra_data['mtnc_status']),
+                    'status' => absint($extra_data['mtnc_status'] ?? 0),
                     'mode' => 'layout',
                     'mtnc_page' => 0,
                     //SEO
                     'title' => strip_tags($extra_data['title']),
                     'analytics' => strip_tags($this->convert_ga($extra_data['analytics'])),
+                    'blockse' => absint($extra_data['blockse'] ?? 0),
                     //Access
                     'per_url_settings' => wp_strip_all_tags($extra_data['per_url_settings']),
                     'per_url_enable_disable' => wp_strip_all_tags($extra_data['per_url_enable_disable']),
-                    'login_button' => @absint($extra_data['login_button']),
+                    'login_button' => absint($extra_data['login_button'] ?? 0),
                     'wplogin_button_tooltip' => wp_strip_all_tags($extra_data['wplogin_button_tooltip']),
                 );
 
@@ -4477,7 +4478,7 @@ class MTNC
             if (!empty($mtnc_options['expiry_time_end'])) {
                 $vtime_end = $mtnc_options['expiry_time_end'];
             }
-            if ($mtnc_options['state'] && !empty($mtnc_options['expiry_date_end']) && !empty($mtnc_options['expiry_time_end'])) {
+            if (isset($mtnc_options['state']) && $mtnc_options['state'] && !empty($mtnc_options['expiry_date_end']) && !empty($mtnc_options['expiry_time_end'])) {
                 $date_concat = $vdate_end . ' ' . $vtime_end;
                 $v_curr_date = strtotime($date_concat);
                 if (strtotime(current_time('mysql', 0)) < $v_curr_date) {
